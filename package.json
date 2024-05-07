@@ -9,7 +9,7 @@
     "client install": "npm install --prefix client",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm install && npm run start"
+    "build": "NODE_ENV=production npm install && npm run start"
   },
   "keywords": [
     "express",
