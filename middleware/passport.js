@@ -7,7 +7,7 @@ const passport = require('passport');
 
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: keys.JWT
+    secretOrKey: keys.jwt
 }
 
 module.exports = passport => {
