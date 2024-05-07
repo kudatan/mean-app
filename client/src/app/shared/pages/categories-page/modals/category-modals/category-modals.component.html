@@ -1,0 +1,27 @@
+<form [formGroup]="positionForm" (ngSubmit)="onSubmit()">
+  <div class="modal" #categoryModal>
+    <div class="modal-content">
+      <h4 class="mb1">Add position</h4>
+      <div class="input-field">
+        <input formControlName="name"
+               [class]="{'invalid': positionForm.get('name')?.invalid && positionForm.get('name')?.touched}"
+               id="pos-name" type="text" >
+        <label for="pos-name">Name</label>
+        <span *ngIf="positionForm.get('name')?.invalid && positionForm.get('name')?.touched"
+              class="helper-text red-text">Name must not be empty</span>
+      </div>
+      <div class="input-field">
+        <input formControlName="cost"
+               [class]="{'invalid': positionForm.get('cost')?.invalid && positionForm.get('cost')?.touched}"
+               id="pos-cost" type="number" min="1">
+        <label for="pos-cost">Cost</label>
+        <span *ngIf="positionForm.get('cost')?.invalid && positionForm.get('cost')?.touched"
+              class="helper-text red-text">Cost must be greater than 1</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button (click)="onCancel()" type="button" class="modal-action waves-effect waves-black btn-flat">Cancel</button>
+      <button [disabled]="positionForm.invalid || positionForm.disabled" class="modal-action btn waves-effect" type="submit">Save</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,28 @@
+<div #modal class="modal modal-fixed-footer">
+  <div *ngIf="selectOrder" class="modal-content">
+    <h4 class="mb1">Order №{{selectOrder.order}}</h4>
+    <table class="highlight">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Cost</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let item of selectOrder.list">
+        <td>{{item.name}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.cost}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="order-summary">
+      <p> Total <strong>{{computePrice(selectOrder)}}</strong></p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="cancel()" class="modal-action waves-effect waves-black btn-flat">Close</button>
+  </div>
+</div>

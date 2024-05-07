@@ -1,0 +1,42 @@
+<div class="page-title">
+  <h4>
+    <a routerLink="/categories">Categories</a>
+    <i class="material-icons">keyboard_arrow_right</i>
+    {{ isNew ? 'Add': 'Edit' }} category
+  </h4>
+  <span *ngIf="!isNew">
+    <button (click)="deleteCategory()" class="btn btn-small red">
+      <i class="material-icons">delete</i>
+    </button>
+  </span>
+</div>
+
+<div class="row">
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="col s12 l6">
+    <div class="input-field">
+      <input formControlName="name" id="name" type="text" [ngClass]="{'invalid': categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched }">
+      <label for="name">Name</label>
+      <span *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched" class="helper-text red-text">Name is required</span>
+    </div>
+    <div class="flex-column">
+      <input (change)="onFileUpload($event)" type="file" class="none" accept="image/png, image/jpeg, image/jpg" #input>
+      <button (click)="triggerClick()" [disabled]="categoryForm.invalid || categoryForm.disabled" type="button" class="waves-effect waves-light btn orange lighten-2">
+        <i class="material-icons left">backup</i>
+        Add image
+      </button>
+      <span class="grey-color mb2">png, jpeg, jpg</span>
+    </div>
+    <div>
+      <button type="submit" [disabled]="categoryForm.invalid || categoryForm.disabled || (!inputChange && !imageChange)" class="waves-effect waves-light btn">
+        Save changes
+      </button>
+    </div>
+  </form>
+  <div class="col s12 l4 center">
+    <img class="responsive-img h200" [src]="imagePreview" *ngIf="imagePreview" alt="category-img">
+  </div>
+</div>
+
+<app-positions-form *ngIf="categoryId"
+  [categoryId]="categoryId"
+></app-positions-form>

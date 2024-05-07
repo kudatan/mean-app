@@ -1,0 +1,15 @@
+<div class="page-title">
+  <h4 *ngIf="isRoot">Order</h4>
+  <h4 *ngIf="!isRoot">
+    <a routerLink="/order">Order</a>
+    <i class="material-icons">keyboard_arrow_right</i>
+    Add products
+  </h4>
+  <button (click)="openModal()" [disabled]="order.list.length === 0" class="waves-effect btn grey darken-1">
+    complete
+  </button>
+</div>
+
+<router-outlet></router-outlet>
+
+<app-order-modal></app-order-modal>

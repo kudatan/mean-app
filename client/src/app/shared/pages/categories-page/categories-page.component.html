@@ -1,0 +1,22 @@
+<div class="page-title">
+  <h4>Categories</h4>
+  <button routerLink="/categories/new" class="waves-effect waves-light btn grey darken-1">Add category</button>
+</div>
+
+<div *ngIf="categories$ | async as categories; else loader" class="row">
+  <div class="col s12">
+    <div *ngIf="categories.length !== 0; else empty" class="collection">
+      <a *ngFor="let category of categories" [routerLink]="['/categories', category._id]" class="collection-item truncate">{{ category.name }}</a>
+    </div>
+  </div>
+</div>
+
+<ng-template #empty>
+ <div class="center">
+   <span>You don't have any categories</span>
+ </div>
+</ng-template>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
