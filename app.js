@@ -13,6 +13,8 @@ const keys = require('./config/keys');
 const path = require('path');
 const app = express();
 
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
 mongoose.connect(keys.MONGO_URI)
     .then(() => console.log('MongoDB connected'))
     .catch(error => console.log(error))
