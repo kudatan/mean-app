@@ -73,7 +73,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
             this.categoryForm.patchValue({
               name: category.name
             });
-            this.imagePreview = `${this.apiUrl}/${category.imageSrc}`;
+            this.imagePreview = category.imageSrc;
             MaterialService.updateTextInputs();
 
             this.categoryForm.enable();

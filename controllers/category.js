@@ -3,6 +3,7 @@ const Position = require('../models/Position')
 const errorHandler = require('../utils/errorHandler');
 const moment = require('moment');
 const {unlinkSync} = require("fs");
+const {uploadToVercelBlob} = require("../middleware/vercelBlobService");
 
 module.exports.getAll = async function (req, res) {
     try {
@@ -47,69 +48,46 @@ module.exports.remove = async function (req, res) {
 }
 
 module.exports.create = async function (req, res) {
-    const date = moment().format('DDMMYYYY-HHmmss_SSS');
-
     try {
+        const imageUrl = req.file ? await uploadToVercelBlob(req.file.buffer, req.file.originalname) : '';
+
         const category = new Category({
             name: req.body.name,
             user: req.user.id,
-            imageSrc: req.file ? req.file.path : ''
+            imageSrc: imageUrl,
         });
 
         await category.save();
         res.status(201).json(category);
     } catch (error) {
-        if (error.code === 11000 && error.keyPattern && error.keyPattern.name === 1) {
-            return res.status(400).json({ message: 'Category with this name already exists' });
-        } else {
-            errorHandler(res, error);
-        }
+        errorHandler(res, error);
     }
-}
+};
 
 module.exports.update = async function (req, res) {
     const updated = {
-        name: req.body.name
-    }
+        name: req.body.name,
+    };
 
     if (req.file) {
-        updated.imageSrc = req.file.path;
+        updated.imageSrc = await uploadToVercelBlob(req.file.buffer, req.file.originalname);
 
-        try {
-            const existingCategory = await Category.findById(req.params.id);
+        const existingCategory = await Category.findById(req.params.id);
 
-            if (existingCategory.imageSrc) {
-                try {
-                    unlinkSync(existingCategory.imageSrc);
-                } catch (error) {
-                    console.error("Error deleting old image:", error);
-                }
-            }
+        if (existingCategory.imageSrc) {
 
-            const category = await Category.findOneAndUpdate(
-                {_id: req.params.id},
-                {$set: updated},
-                {new: true}
-            );
-            res.status(200).json(category);
-        } catch (error) {
-            errorHandler(res, error);
-        }
-    } else {
-        try {
-            const category = await Category.findOneAndUpdate(
-                {_id: req.params.id},
-                {$set: updated},
-                {new: true}
-            );
-            res.status(200).json(category);
-        } catch (error) {
-            if (error.code === 11000 && error.keyPattern && error.keyPattern.name === 1) {
-                return res.status(400).json({ message: 'Category with this name already exists' });
-            } else {
-                errorHandler(res, error);
-            }
         }
     }
-}
+
+    try {
+        const category = await Category.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: updated },
+            { new: true }
+        );
+        res.status(200).json(category);
+    } catch (error) {
+        errorHandler(res, error);
+    }
+};
 
