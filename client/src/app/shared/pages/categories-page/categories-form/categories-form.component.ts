@@ -95,6 +95,12 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
 
   onFileUpload(event: any) {
     const file = event.target.files[0];
+    const maxFileSizeInBytes = 4.5 * 1024 * 1024;
+
+    if (file.size > maxFileSizeInBytes) {
+      MaterialService.toast('File size exceeds the maximum limit of 4.5 MB');
+      return;
+    }
 
     if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg') {
       this.image = file;
@@ -109,7 +115,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
 
       reader.readAsDataURL(this.image);
     } else {
-      MaterialService.toast('We only support png, jpeg, jpg')
+      MaterialService.toast('We only support png, jpeg, and jpg formats');
     }
   }
 

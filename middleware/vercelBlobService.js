@@ -1,5 +1,9 @@
-const { put } = require('@vercel/blob');
+const { put, del} = require('@vercel/blob');
 const moment = require('moment');
+
+const deleteFromVercelBlob = async (storagePath) => {
+    await del(storagePath);
+};
 
 const uploadToVercelBlob = async (fileBuffer, originalFileName) => {
     const timestamp = moment().format('DDMMYYYY-HHmmss');
@@ -16,4 +20,5 @@ const uploadToVercelBlob = async (fileBuffer, originalFileName) => {
 
 module.exports = {
     uploadToVercelBlob,
+    deleteFromVercelBlob
 };

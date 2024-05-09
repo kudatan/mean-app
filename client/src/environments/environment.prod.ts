@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/api'
+  baseUrl: 'https://mean-app-six.vercel.app'
 };
