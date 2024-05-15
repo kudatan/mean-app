@@ -3,6 +3,7 @@
     Yesterday's review ({{yesterday | date:'dd.MM.yyyy'}})
     <i class="material-icons black-text pointer" (click)="openInfo()">info_outline</i>
   </h4>
+  <span>If you don't see anything here, there were no orders yesterday.</span>
 </div>
 
 <div *ngIf="data$ | async as data; else loader" class="row">

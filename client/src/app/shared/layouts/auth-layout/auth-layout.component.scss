@@ -1,32 +1,4 @@
-.nav-header {
-  background-color: #F8F8F8 !important;
-  display: flex;
-  justify-content: space-between;
-}
-
 .auth__wrapper {
-  height: calc(100vh - 64px);
+  height: calc(100vh - 56px);
   align-items: flex-start!important;
-}
-
-.logo-text {
-  font-weight: 800;
-  position: relative;
-  white-space: nowrap;
-}
-
-.logo {
-  max-width: 45px;
-  margin-right: 10px;
-}
-
-.logo-text__wrapper {
-  display: flex;
-  align-items: center;
-}
-
-@media only screen and (max-width: 992px) {
-  .hide-on-med-and-down {
-    display: flex !important;
-  }
 }

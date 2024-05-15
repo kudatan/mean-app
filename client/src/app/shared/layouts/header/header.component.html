@@ -1,0 +1,47 @@
+<nav>
+  <div class="nav-header nav-wrapper grey darken-1">
+    <ul *ngIf="!isAuthorized" id="nav-mobile" class="right hide-on-med-and-down">
+      <li routerLinkActive="active">
+        <a class="dark-text" routerLink="login">Log in</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="dark-text" routerLink="register">Sign in</a>
+      </li>
+    </ul>
+    <button class="open-burger" *ngIf="isAuthorized" (click)="openBurger()">
+      <svg id="burger-icon" width="30px" height="45px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <rect width="424" height="45" x="48" y="192" class="burger-line top-line"/>
+        <rect width="424" height="45" x="48" y="304" class="burger-line middle-line"/>
+        <rect width="424" height="45" x="48" y="416" class="burger-line bottom-line"/>
+      </svg>
+    </button>
+    <div class="burger" [class]="showBurger ? 'show' : 'hide'" (click)="closeBurger($event)">
+      <div class="burger__wrapper"
+           [ngClass]="{'open-side-filters': showBurgerOpen, 'close-side-filters': !showBurgerOpen}"
+           (click)="$event.stopPropagation()">
+        <div>
+          <ul class="nav-item">
+            <li *ngFor="let link of links" routerLinkActive="active" class="bold">
+              <a [routerLink]="[link.url]" (click)="closeBurger($event)"
+                 class="waves-effect waves-orange burger-link">{{ link.name }}</a>
+            </li>
+            <li class="bold last logout waves-effect waves-orange">
+              <div class="">
+              <img src="assets/exit.svg" alt="exit" width="30px">
+              </div>
+              <a (click)="logout($event)" class=" burger-link">Exit account</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="logo-text__wrapper">
+      <div class="logo-img__wrapper">
+        <img class="logo" alt="logo" src="../../../../assets/logo.svg">
+      </div>
+      <div class="aaa">
+        <a class="logo-text brand-logo dark-text">Kuda Tan</a>
+      </div>
+    </div>
+  </div>
+</nav>
