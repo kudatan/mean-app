@@ -4,6 +4,7 @@ import {SiteLayoutComponent} from "./shared/layouts/site-layout/site-layout.comp
 import {LoginPageComponent} from "./shared/pages/login-page/login-page.component";
 import {RegisterPageComponent} from "./shared/pages/register-page/register-page.component";
 import {AuthGuard} from "./core/guards/auth.guard";
+import {NotFoundComponent} from "./shared/pages/not-found/not-found.component";
 
 export const routes: Routes = [
   {
@@ -41,5 +42,6 @@ export const routes: Routes = [
           .then(r => r.categoryRoutes)
       }
     ]
-  }
+  },
+  {path: '**', pathMatch: 'full', component: NotFoundComponent}
 ];
