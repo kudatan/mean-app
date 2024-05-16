@@ -6,6 +6,7 @@ import {RegisterPageComponent} from "./shared/pages/register-page/register-page.
 import {AuthGuard} from "./core/guards/auth.guard";
 import {NotFoundComponent} from "./shared/pages/not-found/not-found.component";
 import {NoAuthGuard} from "./core/guards/noAuth.guard";
+import {HowItWorksComponent} from "./shared/pages/how-it-works/how-it-works.component";
 
 export const routes: Routes = [
   {
@@ -41,7 +42,8 @@ export const routes: Routes = [
         path: 'categories',
         loadChildren: () => import('../app/shared/pages/categories-page/category.routes')
           .then(r => r.categoryRoutes)
-      }
+      },
+      { path: 'how-it-works', component: HowItWorksComponent, canActivate: [AuthGuard] }
     ]
   },
   {path: '**', pathMatch: 'full', component: NotFoundComponent}

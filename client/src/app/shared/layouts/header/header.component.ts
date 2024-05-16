@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   isAuthorized: boolean = this.authService.isAuthenticated();
 
   links = [
+    {url: '/how-it-works', name: 'How it works'},
     {url: '/overview', name: 'Overview'},
     {url: '/analytics', name: 'Analytics'},
     {url: '/history', name: 'History'},

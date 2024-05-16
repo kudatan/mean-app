@@ -38,3 +38,16 @@ main, footer {
 .tap-target-wrapper {
   z-index: 10000;
 }
+
+@media (max-width: 444px) {
+  .col.order {
+    width: 80px!important;
+  }
+
+  .filter {
+    .fr .col.filter-pickers .input-field {
+      width: 80px!important;
+      min-width: 80px!important;
+    }
+  }
+}
