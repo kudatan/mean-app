@@ -51,3 +51,10 @@ main, footer {
     }
   }
 }
+
+@media (max-width: 438px) {
+  .auth-block .card {
+    width: 100%;
+    min-width: 300px;
+  }
+}
